@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: e-commerce-deployment
+  namespace: e-commerce-namespace
+
+spec:
+  replicas: 5
+
+  selector:
+    matchLabels:
+      app: e-commerce-app
+
+  template:
+    metadata:
+      labels:
+        app: e-commerce-app
+
+    spec:
+      containers:
+        - name: e-commerce-container
+          image: amanwankar18/multibranch-flask-app:latest
+
+          ports:
+            - containerPort: 5000
+
+---
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: e-commerce-service
+  namespace: e-commerce-namespace
+
+spec:
+  selector:
+    app: e-commerce-app
+
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+
+  type: LoadBalancer
