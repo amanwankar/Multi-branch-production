@@ -1,13 +1,33 @@
-apiversion: v1
+apiVersion: v1
 kind: Service
-metadeta:
+
+metadata:
   name: e-commerce-service
-  namespacee: e-commerce-namespace
+  namespace: e-commerce-namespace
+
 spec:
   selector:
     app: e-commerce-app
+
   ports:
     - protocol: TCP
       port: 80
       targetPort: 5000
+
+  type: LoadBalancerapiVersion: v1
+kind: Service
+
+metadata:
+  name: e-commerce-service
+  namespace: e-commerce-namespace
+
+spec:
+  selector:
+    app: e-commerce-app
+
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+
   type: LoadBalancer
