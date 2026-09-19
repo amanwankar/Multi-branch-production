@@ -1,0 +1,6 @@
+apiVersion: v2
+name: multibranch-flask
+description: A Helm chart for a Flask application with multibranch support
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
