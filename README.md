@@ -1,115 +1,101 @@
 # Multi-Branch Production
 
-A production-style DevOps implementation of a Flask-based e-commerce application using modern CI/CD, containerization, security scanning, Kubernetes, Helm, GitOps, and monitoring tools.
+A production-style Flask e-commerce application demonstrating a complete **DevOps and Cloud-Native workflow** using Git, GitHub, Docker, Docker Hub, Jenkins, Trivy, Kubernetes, Minikube, Helm, Argo CD, Prometheus and Grafana.
 
-The project demonstrates how application code moves from **GitHub source code → Docker image → Jenkins CI/CD → Security Scan → Kubernetes → Helm → Argo CD → Prometheus → Grafana**.
-
----
-
-## 📌 Project Overview
-
-**Multi-Branch Production** is a Flask-based ShopEasy e-commerce application deployed through a complete DevOps workflow.
-
-The main objective of this project is to demonstrate practical implementation of:
-
-* Git & GitHub
-* Git branching and pull requests
-* Python Flask
-* Docker
-* Docker Hub
-* Jenkins CI/CD
-* Trivy security scanning
-* Kubernetes
-* Minikube
-* Helm
-* Argo CD / GitOps
-* Prometheus
-* Grafana
-* Application metrics
-* Kubernetes monitoring
+The project demonstrates how application code moves from **source control → containerization → CI/CD → security scanning → Kubernetes deployment → GitOps → monitoring**.
 
 ---
 
-# 🏗️ Architecture
+## 🚀 Project Overview
+
+**Multi-Branch Production** is a Flask-based e-commerce application containing product browsing and shopping-cart functionality.
+
+The main objective of this project is to implement a complete DevOps lifecycle around the application.
+
+### Application Features
+
+* Flask web application
+* Product listing
+* Shopping cart
+* Add to cart
+* Remove from cart
+* Update quantity
+* Checkout functionality
+* REST-style endpoints
+* Prometheus application metrics
+
+---
+
+# 🏗️ DevOps Architecture
 
 ```text
-                    ┌──────────────────┐
-                    │     Developer    │
-                    └────────┬─────────┘
-                             │
-                             ▼
-                    ┌──────────────────┐
-                    │     GitHub       │
-                    │  Branches / PR   │
-                    └────────┬─────────┘
-                             │
-                             ▼
-                    ┌──────────────────┐
-                    │     Jenkins      │
-                    │      CI/CD       │
-                    └────────┬─────────┘
-                             │
-              ┌──────────────┴──────────────┐
-              ▼                             ▼
-       ┌─────────────┐              ┌─────────────┐
-       │ Docker Build│              │    Trivy    │
-       └──────┬──────┘              │Security Scan│
-              │                     └─────────────┘
-              ▼
-       ┌─────────────┐
-       │ Docker Hub  │
-       └──────┬──────┘
-              │
-              ▼
-       ┌──────────────────┐
-       │     Argo CD      │
-       │      GitOps      │
-       └────────┬─────────┘
-                │
-                ▼
-       ┌──────────────────┐
-       │    Kubernetes    │
-       │     Minikube     │
-       └────────┬─────────┘
-                │
-        ┌───────┴────────┐
-        ▼                ▼
-   ┌─────────┐      ┌─────────┐
-   │ Flask   │      │ Service │
-   │  Pods    │      │         │
-   └────┬────┘      └─────────┘
-        │
-        │ /metrics
-        ▼
-   ┌─────────────┐
-   │ Prometheus  │
-   └──────┬──────┘
-          │
-          ▼
-   ┌─────────────┐
-   │   Grafana   │
-   └─────────────┘
+                         ┌─────────────────┐
+                         │     GitHub      │
+                         │ Source Control  │
+                         └────────┬────────┘
+                                  │
+                                  ▼
+                         ┌─────────────────┐
+                         │     Jenkins     │
+                         │     CI/CD       │
+                         └────────┬────────┘
+                                  │
+                    ┌─────────────┴─────────────┐
+                    ▼                           ▼
+             Python Test                  Docker Build
+                                                │
+                                                ▼
+                                         ┌────────────┐
+                                         │   Trivy    │
+                                         │   Scan     │
+                                         └─────┬──────┘
+                                               │
+                                               ▼
+                                      ┌─────────────────┐
+                                      │   Docker Hub    │
+                                      │ Container Image │
+                                      └────────┬────────┘
+                                               │
+                                               ▼
+                                      ┌─────────────────┐
+                                      │    Argo CD      │
+                                      │     GitOps      │
+                                      └────────┬────────┘
+                                               │
+                                               ▼
+                                      ┌─────────────────┐
+                                      │   Kubernetes    │
+                                      │    Minikube     │
+                                      └────────┬────────┘
+                                               │
+                            ┌──────────────────┴──────────────────┐
+                            ▼                                     ▼
+                     ┌─────────────┐                       ┌─────────────┐
+                     │ Prometheus  │                       │   Grafana   │
+                     │  Metrics    │ ───────────────────► │ Dashboards  │
+                     └─────────────┘                       └─────────────┘
 ```
 
 ---
 
-# 🧰 Technology Stack
+# 🛠️ Technology Stack
 
-| Category           | Technology     |
-| ------------------ | -------------- |
-| Application        | Python / Flask |
-| Source Control     | Git            |
-| Repository         | GitHub         |
-| Containerization   | Docker         |
-| Image Registry     | Docker Hub     |
-| CI/CD              | Jenkins        |
-| Security           | Trivy          |
-| Orchestration      | Kubernetes     |
-| Local Kubernetes   | Minikube       |
-| Package Management | Helm           |
-| GitOps             | Argo CD        |
-| Metrics            | Prometheus     |
-| Visualization      | Grafana        |
+| Technology | Purpose                       |
+| ---------- | ----------------------------- |
+| Python     | Application development       |
+| Flask      | Backend web framework         |
+| Git        | Version control               |
+| GitHub     | Source code management        |
+| Docker     | Containerization              |
+| Docker Hub | Container image registry      |
+| Jenkins    | CI/CD automation              |
+| Trivy      | Container security scanning   |
+| Kubernetes | Container orchestration       |
+| Minikube   | Local Kubernetes cluster      |
+| Helm       | Kubernetes package management |
+| Argo CD    | GitOps continuous delivery    |
+| Prometheus | Metrics collection            |
+| Grafana    | Monitoring and visualization  |
 
 ---
 
@@ -138,65 +124,64 @@ Multi-branch-production/
 │           └── servicemonitor.yaml
 │
 └── screenshots/
+    ├── github-repository.png
+    ├── github-pr.png
+    ├── dockerhub.png
+    ├── jenkins-pipeline.png
+    ├── trivy-scan.png
+    ├── kubernetes.png
+    ├── minikube.png
+    ├── helm.png
+    ├── argocd.png
+    ├── prometheus-targets.png
+    └── grafana-dashboard.png
 ```
 
 ---
 
-# 1️⃣ Application Development
+# 1️⃣ Git & GitHub
 
-The application is built using Flask.
+The project started with Git-based source control.
 
-The Flask application runs on:
+Git was used for:
 
-```text
-Port: 5000
-```
+* Version control
+* Branching
+* Feature development
+* Commit history
+* Pull requests
+* Collaboration
+* GitHub repository management
 
-The application provides e-commerce functionality including:
-
-* Product listing
-* Shopping cart
-* Add to cart
-* Remove from cart
-* Quantity updates
-* Checkout
-* HTTP API endpoints
-
-The application also exposes Prometheus metrics through:
-
-```text
-/metrics
-```
-
-### Run the application
+### Important Commands
 
 ```bash
-python3 app.py
+git status
 ```
 
-### Test the application
+Checks the current working-tree state.
 
 ```bash
-curl http://localhost:5000
+git branch -a
 ```
 
-### Test application metrics
+Shows local and remote branches.
 
 ```bash
-curl http://localhost:5000/metrics
+git log --oneline --graph --all
 ```
 
-The `/metrics` endpoint exposes Flask and Python process metrics that can later be collected by Prometheus.
+Shows the project commit history and branch structure.
 
----
+```bash
+git remote -v
+```
 
-# 2️⃣ Git and GitHub
+Shows the connected GitHub repository.
 
-Git is used for source-code management.
+### Feature Branches
 
-The project follows a multi-branch development approach.
-
-Main branches:
+The project used multiple branches including:
 
 ```text
 main
@@ -204,74 +189,56 @@ featureA
 featureB
 ```
 
-### Check repository
-
-```bash
-git status
-```
-
-### Check branches
-
-```bash
-git branch -a
-```
-
-### View commit history
-
-```bash
-git log --oneline --graph --all
-```
-
-### Check GitHub remote
-
-```bash
-git remote -v
-```
-
-### Create feature branch
-
-```bash
-git checkout -b featureA
-```
-
-```bash
-git checkout -b featureB
-```
-
-### Commit changes
-
-```bash
-git add .
-git commit -m "message"
-```
-
-### Push changes
-
-```bash
-git push origin main
-```
-
-### Pull latest changes
-
-```bash
-git pull origin main
-```
-
-### Development workflow
+Development flow:
 
 ```text
-Feature Branch
-      ↓
-Code Changes
-      ↓
-Commit
-      ↓
-GitHub
-      ↓
+featureA
+   │
+   ▼
 Pull Request
-      ↓
+   │
+   ▼
 main
 ```
+
+---
+
+# 2️⃣ Flask Application
+
+The application was developed using Python Flask.
+
+The application runs on:
+
+```text
+Port: 5000
+```
+
+### Run Application
+
+```bash
+python3 app.py
+```
+
+### Test Application
+
+```bash
+curl http://localhost:5000
+```
+
+The application also exposes Prometheus metrics.
+
+```bash
+curl http://localhost:5000/metrics
+```
+
+The `/metrics` endpoint provides application-level metrics such as:
+
+* HTTP request count
+* Request duration
+* Exceptions
+* Process CPU
+* Process memory
+* Python runtime metrics
 
 ---
 
@@ -279,40 +246,34 @@ main
 
 A Python virtual environment was used to isolate project dependencies.
 
-### Create environment
+### Create Environment
 
 ```bash
 python3 -m venv .venv
 ```
 
-### Activate environment
+### Activate Environment
 
 ```bash
 source .venv/bin/activate
 ```
 
-### Install dependencies
+### Install Dependencies
 
 ```bash
 pip install -r requirements.txt
-```
-
-### Verify packages
-
-```bash
-pip list
 ```
 
 ---
 
 # 4️⃣ Docker Containerization
 
-Docker is used to package the Flask application together with its runtime dependencies.
+The Flask application was containerized using Docker.
 
-The Docker image is based on:
+The Dockerfile uses:
 
 ```text
-python:3.11-slim
+Python 3.11 Slim
 ```
 
 The container exposes:
@@ -321,25 +282,25 @@ The container exposes:
 5000
 ```
 
-### Check Docker
+### Verify Docker
 
 ```bash
 docker --version
 ```
 
-### Build Docker image
+### Build Image
 
 ```bash
 docker build -t multibranch-flask-app:latest .
 ```
 
-### Check images
+### View Images
 
 ```bash
 docker images
 ```
 
-### Run container
+### Run Container
 
 ```bash
 docker run -d \
@@ -348,25 +309,25 @@ docker run -d \
   multibranch-flask-app:latest
 ```
 
-### Check running containers
+### Check Running Containers
 
 ```bash
 docker ps
 ```
 
-### View application logs
+### Check Container Logs
 
 ```bash
 docker logs multibranch-flask-app
 ```
 
-### Test containerized application
+### Test Containerized Application
 
 ```bash
 curl http://localhost:5000
 ```
 
-### Test container metrics
+### Test Container Metrics
 
 ```bash
 curl http://localhost:5000/metrics
@@ -376,46 +337,56 @@ curl http://localhost:5000/metrics
 
 # 5️⃣ Docker Hub
 
-Docker Hub is used as the container image registry.
+Docker Hub was used as the container image registry.
 
-Image repository:
+Repository:
 
 ```text
 amanwankar18/multibranch-flask-app
 ```
 
-### Docker login
+### Docker Login
 
 ```bash
 docker login
 ```
 
-### Tag image
+### Tag Image
 
 ```bash
 docker tag multibranch-flask-app:latest \
   amanwankar18/multibranch-flask-app:latest
 ```
 
-### Push image
+### Push Image
 
 ```bash
 docker push amanwankar18/multibranch-flask-app:latest
 ```
 
-### Verify local image
+### Verify Local Image
 
 ```bash
 docker images
 ```
 
-The image can then be consumed by Kubernetes.
+Docker workflow:
+
+```text
+Dockerfile
+    ↓
+Docker Build
+    ↓
+Docker Image
+    ↓
+Docker Hub
+```
 
 ---
 
 # 6️⃣ Jenkins CI/CD
 
-Jenkins automates the application delivery pipeline.
+Jenkins was implemented as the CI/CD automation server.
 
 The Jenkins pipeline performs:
 
@@ -431,7 +402,7 @@ Trivy Security Scan
 Docker Push
 ```
 
-### Jenkins environment verification
+### Jenkins Environment Verification
 
 ```bash
 sudo systemctl status jenkins
@@ -445,17 +416,19 @@ java -version
 docker --version
 ```
 
-The Jenkins pipeline checks out the `main` branch from GitHub.
+### Application Test
 
-### Application test stage
+Jenkins executes:
 
 ```bash
 python3 -m py_compile app.py
 ```
 
-This verifies that the Python source can be compiled successfully.
+This validates Python syntax before creating the Docker image.
 
-### Docker build stage
+### Docker Build
+
+Jenkins builds the application image using:
 
 ```bash
 docker build \
@@ -464,47 +437,33 @@ docker build \
   .
 ```
 
-### Docker push stage
+### Docker Push
 
-```bash
-docker push ${IMAGE_NAME}:${BUILD_NUMBER}
-```
-
-```bash
-docker push ${IMAGE_NAME}:latest
-```
-
-### CI/CD flow
+The successful pipeline pushes:
 
 ```text
-GitHub
-   ↓
-Jenkins
-   ↓
-Checkout
-   ↓
-Python Test
-   ↓
-Docker Build
-   ↓
-Trivy Scan
-   ↓
-Docker Push
+amanwankar18/multibranch-flask-app:<BUILD_NUMBER>
+```
+
+and:
+
+```text
+amanwankar18/multibranch-flask-app:latest
 ```
 
 ---
 
 # 7️⃣ Trivy Security Scanning
 
-Trivy is used to scan Docker images for known security vulnerabilities.
+Trivy was integrated into the Jenkins pipeline to scan Docker images for security vulnerabilities.
 
-### Check Trivy
+### Verify Trivy
 
 ```bash
 trivy --version
 ```
 
-### Scan Docker image
+### Scan Docker Image
 
 ```bash
 trivy image \
@@ -512,67 +471,63 @@ trivy image \
   amanwankar18/multibranch-flask-app:latest
 ```
 
-The Jenkins pipeline also performs the scan before pushing the image.
-
-```bash
-trivy image \
-  --severity HIGH,CRITICAL \
-  ${IMAGE_NAME}:${BUILD_NUMBER}
-```
-
-### Security workflow
+Jenkins performs the scan before pushing the final image.
 
 ```text
-Docker Image
+Docker Build
      ↓
-   Trivy
+Trivy Scan
      ↓
-HIGH / CRITICAL Vulnerability Report
+Docker Push
 ```
+
+This creates a basic security gate in the CI/CD pipeline.
 
 ---
 
 # 8️⃣ Kubernetes
 
-Kubernetes is used to orchestrate the application containers.
+Kubernetes was used for container orchestration.
 
-### Check kubectl
+The application is deployed using:
+
+* Deployment
+* Pods
+* Service
+* Resource requests
+* Resource limits
+
+### Verify Kubernetes
 
 ```bash
 kubectl version --client
 ```
 
-### Check cluster nodes
+### Check Nodes
 
 ```bash
 kubectl get nodes
 ```
 
-### Check namespaces
-
-```bash
-kubectl get namespaces
-```
-
-### Check pods
+### Check Pods
 
 ```bash
 kubectl get pods
 ```
 
-### Check deployments
+### Check Deployments
 
 ```bash
 kubectl get deployments
 ```
 
-### Check services
+### Check Services
 
 ```bash
 kubectl get services
 ```
 
-### Application resources
+### Application Resources
 
 ```bash
 kubectl get pods -n default
@@ -586,13 +541,13 @@ kubectl get deployment multibranch-flask
 kubectl get svc multibranch-flask
 ```
 
-### Deployment details
+### Deployment Details
 
 ```bash
 kubectl describe deployment multibranch-flask
 ```
 
-### Application logs
+### Application Logs
 
 ```bash
 kubectl logs deployment/multibranch-flask
@@ -602,27 +557,27 @@ kubectl logs deployment/multibranch-flask
 
 # 9️⃣ Minikube
 
-Minikube provides the local Kubernetes cluster used for development and testing.
+Minikube was used to create the local Kubernetes environment.
 
-### Check Minikube
+### Verify Minikube
 
 ```bash
 minikube version
 ```
 
-### Start Minikube
+### Start Cluster
 
 ```bash
 minikube start --driver=docker
 ```
 
-### Check cluster status
+### Check Cluster Status
 
 ```bash
 minikube status
 ```
 
-Expected healthy components:
+Expected status:
 
 ```text
 host: Running
@@ -637,33 +592,17 @@ kubeconfig: Configured
 minikube ip
 ```
 
-### Access Kubernetes service
+### Access Application Service
 
 ```bash
 minikube service multibranch-flask --url
-```
-
-### Minikube architecture
-
-```text
-Minikube
-   ↓
-Kubernetes
-   ↓
-Deployment
-   ↓
-Pods
-   ↓
-Service
-   ↓
-Flask Application
 ```
 
 ---
 
 # 🔟 Helm
 
-Helm is used to package and manage the Kubernetes application.
+Helm was used to package the Kubernetes application as a reusable chart.
 
 Chart:
 
@@ -671,68 +610,12 @@ Chart:
 helm/multibranch-flask/
 ```
 
-### Helm version
-
-```bash
-helm version
-```
-
-### List Helm releases
-
-```bash
-helm list
-```
-
-### List releases across namespaces
-
-```bash
-helm list -A
-```
-
-### Validate Helm chart
-
-```bash
-helm lint helm/multibranch-flask
-```
-
-### Render Kubernetes manifests
-
-```bash
-helm template \
-  multibranch-flask \
-  helm/multibranch-flask
-```
-
-### Install Helm release
-
-```bash
-helm install \
-  multibranch-flask \
-  helm/multibranch-flask
-```
-
-### Upgrade release
-
-```bash
-helm upgrade \
-  multibranch-flask \
-  helm/multibranch-flask
-```
-
-### Check release status
-
-```bash
-helm status multibranch-flask
-```
-
-### Helm structure
+### Helm Structure
 
 ```text
 multibranch-flask/
-│
 ├── Chart.yaml
 ├── values.yaml
-│
 └── templates/
     ├── _helpers.tpl
     ├── deployment.yaml
@@ -740,27 +623,101 @@ multibranch-flask/
     └── servicemonitor.yaml
 ```
 
+### Verify Helm
+
+```bash
+helm version
+```
+
+### View Releases
+
+```bash
+helm list
+```
+
+### Validate Chart
+
+```bash
+helm lint helm/multibranch-flask
+```
+
+### Render Kubernetes Templates
+
+```bash
+helm template \
+  multibranch-flask \
+  helm/multibranch-flask
+```
+
+### Install Chart
+
+```bash
+helm install \
+  multibranch-flask \
+  helm/multibranch-flask
+```
+
+### Upgrade Chart
+
+```bash
+helm upgrade \
+  multibranch-flask \
+  helm/multibranch-flask
+```
+
+### Check Release
+
+```bash
+helm status multibranch-flask
+```
+
+Helm provides the deployment abstraction:
+
+```text
+values.yaml
+     ↓
+Helm Templates
+     ↓
+Kubernetes Manifests
+     ↓
+Kubernetes
+```
+
 ---
 
-# 1️⃣1️⃣ Argo CD / GitOps
+# 1️⃣1️⃣ Argo CD & GitOps
 
-Argo CD implements GitOps deployment.
+Argo CD was used to implement GitOps-based deployment.
 
-Argo CD continuously uses the Kubernetes configuration stored in GitHub.
+Argo CD watches the GitHub repository and synchronizes the Kubernetes configuration.
 
-### Check Argo CD components
+GitOps flow:
+
+```text
+Developer
+    ↓
+GitHub
+    ↓
+Argo CD
+    ↓
+Helm
+    ↓
+Kubernetes
+```
+
+### Check Argo CD
 
 ```bash
 kubectl get pods -n argocd
 ```
 
-### Check applications
+### Check Applications
 
 ```bash
 kubectl get applications -n argocd
 ```
 
-### Check application
+### Check Application
 
 ```bash
 kubectl get application \
@@ -768,4 +725,391 @@ kubectl get application \
   -n argocd
 ```
 
-### Check Sync
+### Check Sync & Health
+
+```bash
+kubectl get application multibranch-flask \
+  -n argocd \
+  -o jsonpath='{.status.sync.status}{" | "}{.status.health.status}{"\n"}'
+```
+
+Expected healthy state:
+
+```text
+Synced | Healthy
+```
+
+### Argo CD UI
+
+Argo CD UI was exposed locally using:
+
+```bash
+kubectl port-forward \
+  --address 0.0.0.0 \
+  -n argocd \
+  svc/argocd-server \
+  8081:443
+```
+
+UI:
+
+```text
+https://localhost:8081
+```
+
+---
+
+# 1️⃣2️⃣ Prometheus Monitoring
+
+Prometheus was installed using the `kube-prometheus-stack`.
+
+It is responsible for collecting Kubernetes and application metrics.
+
+### Check Monitoring Pods
+
+```bash
+kubectl get pods -n monitoring
+```
+
+### Check Monitoring Services
+
+```bash
+kubectl get svc -n monitoring
+```
+
+### Check ServiceMonitor
+
+```bash
+kubectl get servicemonitor -n default
+```
+
+Application ServiceMonitor:
+
+```bash
+kubectl get servicemonitor \
+  multibranch-flask \
+  -n default
+```
+
+### Prometheus UI
+
+Prometheus was exposed locally using:
+
+```bash
+kubectl port-forward \
+  --address 0.0.0.0 \
+  -n monitoring \
+  svc/monitoring-kube-prometheus-prometheus \
+  9090:9090
+```
+
+Prometheus:
+
+```text
+http://localhost:9090
+```
+
+The application exposes metrics through:
+
+```text
+/metrics
+```
+
+---
+
+# 1️⃣3️⃣ Grafana
+
+Grafana was used to visualize Prometheus metrics.
+
+### Check Grafana
+
+```bash
+kubectl get pods -n monitoring | grep grafana
+```
+
+### Grafana UI
+
+```bash
+kubectl port-forward \
+  --address 0.0.0.0 \
+  -n monitoring \
+  svc/monitoring-grafana \
+  3001:80
+```
+
+Grafana:
+
+```text
+http://localhost:3001
+```
+
+Prometheus datasource:
+
+```text
+http://monitoring-kube-prometheus-prometheus.monitoring.svc.cluster.local:9090
+```
+
+---
+
+# 📊 Grafana Application Metrics
+
+The application provides Prometheus metrics through `prometheus-flask-exporter`.
+
+### HTTP Request Rate
+
+```promql
+rate(flask_http_request_total[5m])
+```
+
+### Total Requests
+
+```promql
+flask_http_request_total
+```
+
+### Application Exceptions
+
+```promql
+rate(flask_http_request_exceptions_total[5m])
+```
+
+### Average Request Latency
+
+```promql
+rate(flask_http_request_duration_seconds_sum[5m])
+/
+rate(flask_http_request_duration_seconds_count[5m])
+```
+
+### 95th Percentile Latency
+
+```promql
+histogram_quantile(
+  0.95,
+  sum by (le) (
+    rate(flask_http_request_duration_seconds_bucket[5m])
+  )
+)
+```
+
+### Application CPU
+
+```promql
+rate(process_cpu_seconds_total[5m])
+```
+
+### Application Memory
+
+```promql
+process_resident_memory_bytes
+```
+
+---
+
+# 🔄 Complete CI/CD + GitOps Flow
+
+The complete implementation follows this lifecycle:
+
+```text
+                   Developer
+                       │
+                       ▼
+                  GitHub Repo
+                       │
+                       ▼
+                Jenkins Pipeline
+                       │
+             ┌─────────┴─────────┐
+             ▼                   ▼
+          Testing           Docker Build
+                                 │
+                                 ▼
+                           Trivy Security
+                               Scan
+                                 │
+                                 ▼
+                            Docker Hub
+                                 │
+                                 ▼
+                              Argo CD
+                                 │
+                                 ▼
+                               Helm
+                                 │
+                                 ▼
+                           Kubernetes
+                            / Minikube
+                                 │
+                    ┌────────────┴────────────┐
+                    ▼                         ▼
+               Prometheus                 Application
+                    │                         │
+                    └────────────┬────────────┘
+                                 ▼
+                              Grafana
+                              Dashboard
+```
+
+---
+
+# 📸 Project Evidence
+
+The following screenshots document the implementation:
+
+| Screenshot               | Demonstrates                     |
+| ------------------------ | -------------------------------- |
+| `github-repository.png`  | GitHub repository                |
+| `github-pr.png`          | Branching and Pull Request       |
+| `dockerhub.png`          | Docker image registry            |
+| `jenkins-pipeline.png`   | CI/CD pipeline                   |
+| `trivy-scan.png`         | Container security scanning      |
+| `kubernetes.png`         | Kubernetes resources             |
+| `minikube.png`           | Local Kubernetes cluster         |
+| `helm.png`               | Helm deployment                  |
+| `argocd.png`             | GitOps deployment                |
+| `prometheus-targets.png` | Prometheus monitoring            |
+| `grafana-dashboard.png`  | Application monitoring dashboard |
+
+---
+
+# 📌 Important Proof Commands
+
+For quickly demonstrating the technologies used in this project:
+
+### Git
+
+```bash
+git branch -a
+git log --oneline --graph --all
+```
+
+### Docker
+
+```bash
+docker images
+docker ps
+```
+
+### Jenkins
+
+```bash
+sudo systemctl status jenkins
+```
+
+### Trivy
+
+```bash
+trivy image --severity HIGH,CRITICAL amanwankar18/multibranch-flask-app:latest
+```
+
+### Kubernetes
+
+```bash
+kubectl get nodes
+kubectl get pods
+kubectl get deployments
+kubectl get services
+```
+
+### Minikube
+
+```bash
+minikube status
+```
+
+### Helm
+
+```bash
+helm list
+helm lint helm/multibranch-flask
+```
+
+### Argo CD
+
+```bash
+kubectl get application multibranch-flask -n argocd
+```
+
+### Prometheus
+
+```bash
+kubectl get servicemonitor -n default
+kubectl get pods -n monitoring
+```
+
+### Grafana
+
+```bash
+kubectl get pods -n monitoring | grep grafana
+```
+
+---
+
+# 🎯 DevOps Skills Demonstrated
+
+This project demonstrates practical experience with:
+
+* Git branching and version control
+* GitHub workflows
+* Pull Requests
+* Python Flask
+* Docker containerization
+* Docker Hub
+* Jenkins CI/CD
+* Automated testing
+* Trivy container security scanning
+* Kubernetes Deployments
+* Kubernetes Services
+* Minikube
+* Helm charts
+* GitOps
+* Argo CD
+* Prometheus
+* Grafana
+* Application observability
+* Kubernetes monitoring
+* Infrastructure automation
+
+---
+
+# 👨‍💻 Author
+
+**Aman Vidhyadhar Wankar**
+
+B.Tech Computer Science & Engineering
+
+GitHub: `github.com/amanwankar`
+
+LinkedIn: `linkedin.com/in/aman-w-4b1310266`
+
+---
+
+# ⭐ Project Summary
+
+This project demonstrates a complete production-oriented DevOps workflow starting from source code and ending with automated deployment and observability.
+
+```text
+Code
+ ↓
+GitHub
+ ↓
+Jenkins CI/CD
+ ↓
+Docker
+ ↓
+Trivy
+ ↓
+Docker Hub
+ ↓
+Argo CD
+ ↓
+Helm
+ ↓
+Kubernetes
+ ↓
+Prometheus
+ ↓
+Grafana
+```
+
+The implementation focuses on **automation, containerization, security, GitOps, orchestration and observability**.
