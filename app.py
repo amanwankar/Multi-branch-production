@@ -1,9 +1,11 @@
+from prometheus_flask_exporter import PrometheusMetrics
 from flask import Flask, render_template_string, request, jsonify, session
 import json
 import os
 from datetime import datetime
 
 app = Flask(__name__)
+PrometheusMetrics(app)
 app.secret_key = 'your-secret-key-here'  # Change this in production
 
 # Sample products with free images from Picsum
